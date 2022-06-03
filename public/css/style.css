@@ -1,0 +1,73 @@
+#info {
+	position: absolute;
+	top: 10px;
+	width: 100%;
+	text-align: center;
+	z-index: 100;
+	display:block;
+}
+
+body { 
+  margin: 0;
+}
+canvas { width: 100vw; height: 100vh; display: block; }
+
+.app {
+  background-color: rgb(0, 0, 0);
+  position: absolute;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: end;
+}
+
+.buttonWrapper {
+  height: 100px;
+  position: absolute;
+  display: flex;
+  width: 400px;
+  justify-content: space-between;
+}
+
+/* Viewer Navigation */
+.arrow {
+  z-index: 1000;
+  background: none;
+  border: solid black;
+  border-width: 0 7px 7px 0;
+  display: block;
+  padding: 3px;
+  top: -20px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  opacity: 0.3;
+  transition: 0.3s;
+}
+
+.arrow:hover {opacity: 1}
+
+.right {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+/* END */
+
+/* fade animation */
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
+}

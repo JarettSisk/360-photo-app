@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="app">
+<!-- Viewer navigation -->
+<div class="buttonWrapper">
+  <button class="arrow left previous-photo-button"></button>
+  <p class="name-of-photo"></p>
+  <button class="arrow right next-photo-button"></button>
+  </div>
+  
+  <canvas id="bg" class="hidden"></canvas>
+
+</div>
+
+
+
+<!-- Axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.skypack.dev/three@0.132.2" ,
+      "orbitControls": "https://cdn.skypack.dev/three@0.132.2/examples/jsm/controls/OrbitControls.js"
+    }
+  }
+</script>
+
+<script type="module" src="/js/main.js"></script>
+
+{% endblock %}
