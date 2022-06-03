@@ -57,6 +57,29 @@ canvas { width: 100vw; height: 100vh; display: block; }
   transform: rotate(135deg);
   -webkit-transform: rotate(135deg);
 }
+
+.exit-button {
+  
+  z-index: 100;
+  position: absolute;
+  background-color: rgba(240, 248, 255, 0);
+  border: 2px solid white;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  top: 20px;
+  padding: 10px 30px 10px 30px;
+  color: white;
+  cursor: pointer;
+  opacity: 0.3;
+  transition: 0.3s;
+}
+
+.exit-button > a {
+  color: white;
+  text-decoration: none;
+}
+
+.exit-button:hover {opacity: 1}
 /* END */
 
 /* fade animation */

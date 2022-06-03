@@ -31,12 +31,12 @@ const previousPhotoButton = document.querySelector(".previous-photo-button");
 const nexPhotoButton = document.querySelector(".next-photo-button");
 
 // --TODO: This will everntually take a param for the photo URL
-const renderPhoto = (photo="room1") => {
+const renderPhoto = (photoURL="room1") => {
     // photo mesh setup
     const geometry = new THREE.SphereGeometry( 500, 60, 40 );
     geometry.scale( - 1, 1, 1 );
     var material = new THREE.MeshBasicMaterial( {
-      map: new THREE.TextureLoader().load(`/images/${photo}`),
+      map: new THREE.TextureLoader().load(`${photoURL}`),
     } );
     const mesh = new THREE.Mesh( geometry, material );
     // remove previous mesh and add new
@@ -49,8 +49,8 @@ const getPhotos = async () => {
   // 2. get all photos urls related to that album from the DB
     // --TODO this is just test data. We need to get and store the data later.
     const currentPath = window.location.pathname;
-    const photos = await axios.get(`${currentPath}/photos`);
-
+    const photos = await axios.get(`/photo`);
+    console.log(photos)
   // 3. if photos, return them
   if(photos) {
     fetchedPhotos = photos.data;
