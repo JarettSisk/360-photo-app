@@ -69,16 +69,11 @@ canvas { width: 100vw; height: 100vh; display: block; }
   top: 20px;
   padding: 10px 30px 10px 30px;
   color: white;
+  text-decoration: none;
   cursor: pointer;
   opacity: 0.3;
   transition: 0.3s;
 }
-
-.exit-button > a {
-  color: white;
-  text-decoration: none;
-}
-
 .exit-button:hover {opacity: 1}
 /* END */
 
@@ -93,4 +88,13 @@ canvas { width: 100vw; height: 100vh; display: block; }
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s 1s, opacity 1s linear;
+}
+/* END */
+
+/* Error page styles */
+.error-wrapper {
+  margin: 40px;
+  color: rgb(189, 0, 0);
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
 }

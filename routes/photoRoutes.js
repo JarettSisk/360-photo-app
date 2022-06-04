@@ -4,7 +4,7 @@ const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const fs = require("fs");
 // get all the photo urls on startup from mock db
-let photos = require('../photo_url_data.json');
+const photos = require('../photo_url_data.json');
 
 const { uploadFile, getPhotoUrl } = require("../s3");
 const { savePhotoUrl } = require("../helpers/jsonHelpers");
@@ -15,16 +15,10 @@ const { savePhotoUrl } = require("../helpers/jsonHelpers");
 router.get("/", function(req, res, next) {
   // -TODO fix this so that it return error to client
   try {
-    if(photos.length > 0) {
       return res.send(photos);
-
-    } else {
-      throw new Error("please add photos to view them")
-    }
   } catch (error) {
-   return next(error); 
+    next(error); 
   }
-  
 });
 
 // POST photo - render the photo upload form template

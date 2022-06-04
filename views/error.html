@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="error-wrapper">
+  <h3>ERROR</h3>
+  <p>Error Message: {{err.message}} </p>
+  <p>Status Code: {{status}}</p>
+</div>
+
+{% endblock %}

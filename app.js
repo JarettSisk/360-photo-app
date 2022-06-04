@@ -21,8 +21,6 @@ nunjucks.configure('views', {
 app.use('./build/', express.static('node_modules/three/build'));
 app.use('./jsm/', express.static('node_modules/three/examples/jsm'));
 
-
-
 // ROUTES
 const viewerRoutes = require("./routes/viewerRoutes");
 const photoRoutes = require("./routes/photoRoutes");
@@ -31,20 +29,13 @@ app.use('/viewer', viewerRoutes);
 app.use('/photo', photoRoutes);
 
 
-
-
-
-
-
 /** Generic error handler; anything unhandled goes here. */
 app.use(function (err, req, res, next) {
   if (process.env.NODE_ENV !== "test") console.error(err.stack);
   const status = err.status || 500;
   const message = err.message;
-
-  return res.status(status).json({
-    error: { message, status },
-  });
+  console.log("ERROR HANDLER RUNNNING");
+  return res.render("error.html", {err, status});
 });
 
 module.exports = app;
