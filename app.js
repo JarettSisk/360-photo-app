@@ -34,6 +34,7 @@ app.use('/viewer', viewerRoutes);
 app.use('/photo', photoRoutes);
 
 
+
 /** Generic error handler; anything unhandled goes here. */
 app.use(function (err, req, res, next) {
   if (process.env.NODE_ENV !== "test") console.error(err.stack);
@@ -41,5 +42,11 @@ app.use(function (err, req, res, next) {
   const message = err.message;
   return res.render("error.html", {err, status});
 });
+
+// Redirect incase no route is met
+app.get("/*", (req, res, next) => {
+  res.redirect("/photo/add");
+})
+
 
 module.exports = app;
