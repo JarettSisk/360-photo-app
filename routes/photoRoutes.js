@@ -35,6 +35,10 @@ router.get("/add", function(req, res, next) {
 // POST photo - upload a new photo to the S3 bucket
 router.post('/add', upload.single('image'), async function (req, res, next) {
   try {
+  if(req.body.password !== process.env.SECRET_KEY) {
+    let message = "Incorect password. See admin";
+    return res.render("addPhotoForm.html", {message});
+  }
     // Our image file
   const file = req.file;
   // upload to AWS s3

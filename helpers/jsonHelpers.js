@@ -23,12 +23,9 @@ function savePhoto(item, path = './photo_url_data.json'){
 
 // function to store new photo in our json file
 function deletePhoto(item, path = './photo_url_data.json'){
-  console.log("running delete funcion");
   let data = fs.readFileSync(path, 'utf8');
   let json = JSON.parse(data);
   json = json.filter((obj) => {
-    console.log(item)
-    console.log(obj);
     return obj.key !== item.key });
   fs.writeFileSync(path, JSON.stringify(json, null, 2));
 }

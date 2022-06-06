@@ -264,3 +264,10 @@ canvas {
 .viewer-link:hover {
   opacity: 1;
 }
+
+.password-input {
+  margin: 10px 0;
+  display: block;
+  background-color: white;
+  text-align: left;
+}

@@ -11,7 +11,6 @@ const photosDemo = ["/images/room1.jpg", "/images/room2.jpg"]
 router.get("/", function(req, res, next) {
   try {
     let photos = getPhotos();
-    console.log(photos.length)
 
     if(photos.length > 0) {
 
