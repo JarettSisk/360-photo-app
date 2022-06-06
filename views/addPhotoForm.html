@@ -5,10 +5,23 @@
   <h1>Add photos</h1>
   <form action="" method="POST" enctype="multipart/form-data">
     <input type="file" id="image-upload-input" name="image" required>
-    <button type="submit">ADD</button>
+    <button type="submit" class="add-photo-button">ADD</button>
   </form>
+
+  <a href="/viewer" class="viewer-link">View Uploaded Photos</a>
+  <p>Dont have any 360 photos to upload? Check out the <a href="/viewer/demo" class="viewer-link">demo version</a></p>
   
+
+<p class="add-photo-loading"></p>
+
 {% if message %}
-  {{message}}
+  <p>{{message}}</p>
 {% endif %}
+
+<ol class="photo-list">
+<!-- list for holding uploaded photos -->
+</ol>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="/js/photo.js"></script>
+
 {% endblock %}

@@ -18,7 +18,7 @@ const s3 = new S3({
 function uploadFile(file) {
   const fileStream = fs.createReadStream(file.path);
 
-  const uploadParams = {
+  let uploadParams = {
     
     Bucket: s3Bucket,
     Body: fileStream,
@@ -26,15 +26,29 @@ function uploadFile(file) {
     Key: file.filename
   }
 
+
   return s3.upload(uploadParams).promise();
 
 }
 
-exports.uploadFile = uploadFile;
+// function to delete a photo from out bucket
+
+function deleteFile(key) {
+
+  let params = {
+    Bucket: s3Bucket,
+    Key: key
+  }
+
+  return s3.deleteObject(params).promise();
+}
+
+
 
 // function to get a photo from s3
 const getPhotoUrl = (fileName) => {
-
+  console.log("getting photo url")
+  console.log(fileName);
   const signedUrlExpireSeconds = 60 * 60
 
   const url = s3.getSignedUrl('getObject', {
@@ -45,7 +59,8 @@ const getPhotoUrl = (fileName) => {
   return url;
 }
 
-exports.getPhotoUrl = getPhotoUrl;
+
+module.exports = { uploadFile, deleteFile, getPhotoUrl };
 
 
 

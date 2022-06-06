@@ -34,7 +34,7 @@ canvas { width: 100vw; height: 100vh; display: block; }
 .arrow {
   z-index: 1000;
   background: none;
-  border: solid black;
+  border: solid rgb(255, 255, 255);
   border-width: 0 7px 7px 0;
   display: block;
   padding: 3px;
@@ -42,7 +42,7 @@ canvas { width: 100vw; height: 100vh; display: block; }
   cursor: pointer;
   width: 50px;
   height: 50px;
-  opacity: 0.3;
+  opacity: 0.5;
   transition: 0.3s;
 }
 
@@ -71,7 +71,7 @@ canvas { width: 100vw; height: 100vh; display: block; }
   color: white;
   text-decoration: none;
   cursor: pointer;
-  opacity: 0.3;
+  opacity: 0.5;
   transition: 0.3s;
 }
 .exit-button:hover {opacity: 1}
@@ -97,4 +97,10 @@ canvas { width: 100vw; height: 100vh; display: block; }
   color: rgb(189, 0, 0);
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
+}
+/* END */
+
+/* addPhotoForm Styles */
+.photo {
+  width: 400px;
 }

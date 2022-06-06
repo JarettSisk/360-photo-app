@@ -11,6 +11,9 @@ const app = express();
 app.use(express.static(path.join('public')))
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}));
 
 nunjucks.configure('views', {
     autoescape: true,
@@ -24,7 +27,9 @@ app.use('./jsm/', express.static('node_modules/three/examples/jsm'));
 // ROUTES
 const viewerRoutes = require("./routes/viewerRoutes");
 const photoRoutes = require("./routes/photoRoutes");
-
+app.get("/", (req, res, next) => {
+  res.redirect("/photo/add");
+})
 app.use('/viewer', viewerRoutes);
 app.use('/photo', photoRoutes);
 

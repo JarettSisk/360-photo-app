@@ -51,8 +51,7 @@ const getPhotos = async () => {
   //1. get the name of the album from query param
   // 2. get all photos urls related to that album from the DB
     // --TODO this is just test data. We need to get and store the data later.
-    const currentPath = window.location.pathname;
-    const photos = await axios.get(`/photo`);
+    const photos = await axios.get(`/photo/demo`);
     console.log(photos)
   // 3. if photos, return them
   if(photos) {
@@ -60,7 +59,7 @@ const getPhotos = async () => {
     console.log(fetchedPhotos)
     currentPhoto = fetchedPhotos[0];
     setTimeout(function(){
-      renderPhoto(fetchedPhotos[0].photo_url);
+      renderPhoto(fetchedPhotos[0]);
     }, 1000);//wait 2 seconds
   }  
 }
@@ -86,7 +85,7 @@ const changePhoto = (direction) => {
       // hack for fade timing
       setTimeout(function(){
         currentPhoto = prevPhoto;
-        renderPhoto(prevPhoto.photo_url);
+        renderPhoto(prevPhoto);
       }, 1000);//wait 1 seconds
     }
     } else if (direction === "next") {
@@ -97,7 +96,7 @@ const changePhoto = (direction) => {
         canvas.classList.add("hidden");
         setTimeout(function(){
           currentPhoto = nextPhoto;
-          renderPhoto(nextPhoto.photo_url);
+          renderPhoto(nextPhoto);
         }, 1000);//wait 1 seconds
       }
     }
