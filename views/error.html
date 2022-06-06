@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 
 
-{% block content %}
-<a href="/">Go Back</a>
-<div class="error-wrapper">
-  <h3>ERROR</h3>
-  <p>Error Message: {{err.message}} </p>
-  <p>Status Code: {{status}}</p>
-</div>
+{% block nav %}
+<ul class="nav">
+  <li><a href="/">Go Back</a></li>
+</ul>
+{% endblock %}
 
+{% block main %}
+  <main>
+    <div class="error-wrapper">
+      <h3 class="title">ERROR</h3>
+      <p>Error Message: {{err.message}} </p>
+      <p>Status Code: {{status}}</p>
+    </div>
+  </main>
 {% endblock %}

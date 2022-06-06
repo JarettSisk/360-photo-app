@@ -1,7 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 // get all the photo urls on startup from mock db
-const photos = require('../photo_url_data.json');
+const { getPhotos } = require('../helpers/jsonHelpers');
 
 // Image paths for demo version
 const photosDemo = ["/images/room1.jpg", "/images/room2.jpg"]
@@ -10,11 +10,18 @@ const photosDemo = ["/images/room1.jpg", "/images/room2.jpg"]
 // GET template for viewing
 router.get("/", function(req, res, next) {
   try {
+    let photos = getPhotos();
+    console.log(photos.length)
+
     if(photos.length > 0) {
+
       return res.render("viewer.html");
 
     } else {
-      throw new Error("please add photos to view them")
+      let error = new Error("please add photos to view them");
+      error.status = 404;
+      throw error;
+      
     }
   } catch (error) {
     next(error); 

@@ -1,26 +1,38 @@
 {% extends 'base.html' %}
 
 
-{% block content %}
-  <h1>Add photos</h1>
-  <form action="" method="POST" enctype="multipart/form-data">
-    <input type="file" id="image-upload-input" name="image" required>
-    <button type="submit" class="add-photo-button">ADD</button>
-  </form>
+{% block nav %}
+<!-- nav -->
+  <ul class="nav">
+    <li><a href="/viewer" class="link">360 Viewer</a></li>
+    <li><a href="/viewer/demo" class="link">Demo Viewer</a></li>
+    <li><a href="/about" class="link">About</a></li>  
+  </ul>
+<!-- End nav -->
+{% endblock %}
 
-  <a href="/viewer" class="viewer-link">View Uploaded Photos</a>
-  <p>Dont have any 360 photos to upload? Check out the <a href="/viewer/demo" class="viewer-link">demo version</a></p>
-  
+{% block main %}
+    <h1 class="title">Add Photos</h1>
+    <p>Dont have any 360 photos to upload? Check out the <a href="/viewer/demo" class="link">demo version</a></p>
+    <form action="" method="POST" class="add-photo-form" enctype="multipart/form-data">
+      <input type="file" id="image-upload-input" name="image" required>
+      <button type="submit" class="add-photo-button">UPLOAD</button>
+    </form>
 
-<p class="add-photo-loading"></p>
+    <a href="/viewer" class="viewer-link">View photos in 360</a>
+    
 
-{% if message %}
-  <p>{{message}}</p>
-{% endif %}
+    <p class="add-photo-loading"></p>
 
-<ol class="photo-list">
-<!-- list for holding uploaded photos -->
-</ol>
+    {% if message %}
+      <p>{{message}}</p>
+    {% endif %}
+
+    <ol class="photo-list">
+    <!-- list for holding uploaded photos -->
+    </ol>
+
+<!-- Scripts -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="/js/photo.js"></script>
 

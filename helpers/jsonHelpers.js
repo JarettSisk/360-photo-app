@@ -1,5 +1,10 @@
 const fs = require("fs");
 
+function getPhotos() {
+  let data = fs.readFileSync('./photo_url_data.json', 'utf8'); 
+  return JSON.parse(data);
+}
+
 // function to store new photo in our json file
 function savePhoto(item, path = './photo_url_data.json'){
   if (!fs.existsSync(path)) {
@@ -19,7 +24,7 @@ function savePhoto(item, path = './photo_url_data.json'){
 // function to store new photo in our json file
 function deletePhoto(item, path = './photo_url_data.json'){
   console.log("running delete funcion");
-  let data = fs.readFileSync(path);
+  let data = fs.readFileSync(path, 'utf8');
   let json = JSON.parse(data);
   json = json.filter((obj) => {
     console.log(item)
@@ -28,4 +33,4 @@ function deletePhoto(item, path = './photo_url_data.json'){
   fs.writeFileSync(path, JSON.stringify(json, null, 2));
 }
 
-module.exports = { savePhoto, deletePhoto };
+module.exports = { savePhoto, deletePhoto, getPhotos };

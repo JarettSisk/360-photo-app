@@ -4,20 +4,12 @@ console.log("test")
 const addPhotoErrorEl = document.querySelector(".add-photo-loading");
 // on page reload, init to empty
 addPhotoErrorEl.innerText = "";
-const addPhotoButton = document.querySelector(".add-photo-button");
+const addPhotoForm = document.querySelector(".add-photo-form");
 
-addPhotoButton.addEventListener("click", (e) => {
+addPhotoForm.addEventListener("submit", (e) => {
   // add a loading message into the error popup
   addPhotoErrorEl.innerText = "Uploading...";
 })
-
-// we need to get the photos,
-// for each photo create <li><form class="remove-photo-form" method="POST"><button type="submit"></button></form><img src="presignedURL"></img></li>,
-// set up image with src tags as the presigned urls,
-// and key properties that hold the key for deletion purposes.
-// dont forget about those delete buttons!.
-
-
 
 // Elements
 let photoList = document.querySelector('.photo-list');
@@ -37,7 +29,6 @@ function createPhotoDom(key, photo_url) {
 
     const removeBtn = document.createElement('button');
     removeBtn.classList.add('remove');
-    removeBtn.classList.add('hidden-print');
     removeBtn.innerText = 'X';
     removeBtn.setAttribute('type', 'submit');
 

@@ -9,7 +9,7 @@ let photos = require('../photo_url_data.json');
 const photosDemo = ["/images/room1.jpg", "/images/room2.jpg"]
 
 const { uploadFile, getPhotoUrl, deleteFile } = require("../s3");
-const { savePhoto, deletePhoto } = require("../helpers/jsonHelpers");
+const { savePhoto, deletePhoto, getPhotos } = require("../helpers/jsonHelpers");
 
 
 
@@ -17,6 +17,7 @@ const { savePhoto, deletePhoto } = require("../helpers/jsonHelpers");
 router.get("/", function(req, res, next) {
   // -TODO fix this so that it return error to client
   try {
+      photos = getPhotos();
       return res.send(photos);
   } catch (error) {
     next(error); 
@@ -36,16 +37,13 @@ router.post('/add', upload.single('image'), async function (req, res, next) {
   try {
     // Our image file
   const file = req.file;
-  console.log(file);
   // upload to AWS s3
   const result = await uploadFile(file)
-  console.log(result);
   // Create a new pre-signed url for storage
   const signedUrl = await getPhotoUrl(result.Key);
   // save the url to our mock database
   savePhoto({key: result.Key, photo_url: signedUrl});
-  // since the mock data is only fetched on server startup, we push the data manually to update without startup.
-  photos.push({key: result.Key, photo_url: signedUrl});
+  photos = getPhotos();
   let message;
   if(result) {
     message = "Photo sucessfully added";
@@ -65,9 +63,10 @@ router.post('/delete',async (req, res, next) => {
   try {
 
     const result = await deleteFile(req.body.key);
-
+    // delete the photo from out mock db, and set photos to be the result
     deletePhoto({key: req.body.key, photo_url: req.body.photo_url});
-    photos = photos.filter(photo => photo.key !== req.body.key);
+    photos = getPhotos();
+    
     return res.send(result);
     
   } catch (error) {
