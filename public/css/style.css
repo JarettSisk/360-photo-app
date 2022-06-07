@@ -191,6 +191,12 @@ canvas {
 /* END */
 
 /* addPhotoForm Styles */
+
+.faq-p {
+  text-align: center;
+  max-width: 550px;
+}
+
 .photo {
   width: 400px;
   box-shadow: rgb(0, 0, 0) 0px 7px 29px 0px;
