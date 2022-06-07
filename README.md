@@ -30,6 +30,6 @@ Live Demo: [360-photo-app](https://jarett-sisk-360-photo.herokuapp.com/photo/add
 - Full 360 degree viewing experience
 - Dynamic viewport width and height
 - Carousel style viewer navigation
-- Uses of Amazons S3 cloud service for storing photos
+- Uses Amazons S3 cloud service for storing photos
 
 
