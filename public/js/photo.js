@@ -19,7 +19,9 @@ addPhotoForm.addEventListener("submit", async (e) => {
     })
     if(response)
       messageEl.innerText = "Photo successfully uploaded";
+      // append photos to dom
       appendPhotos()
+      // reset the form
       addPhotoForm.reset();
   } catch (error) {
     err = error.response; 

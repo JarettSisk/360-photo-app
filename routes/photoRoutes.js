@@ -20,7 +20,7 @@ router.get("/", function(req, res) {
 // GET /photo/get - get all photos
 router.get("/get", function(req, res, next) {
   try {
-      // get photos and set the returning value to our photos var
+      // Get photos
       photos = getPhotos();
       return res.send(photos);
   } catch (error) {
@@ -31,6 +31,7 @@ router.get("/get", function(req, res, next) {
 // POST /photo - upload a new photo to the S3 bucket
 router.post('/', upload.single('image'), async function (req, res, next) {
   try {
+    // If form password incorrect, return error.
     if(req.body.password !== SECRET_KEY) {
       // delete multed image file
       fs.unlinkSync(req.file.path);
@@ -39,14 +40,16 @@ router.post('/', upload.single('image'), async function (req, res, next) {
     // Our image file
     const file = req.file;
     console.log(file);
-    // upload to AWS s3
+
+    // upload to AWS s3 bucket
     const result = await uploadFile(file)
     console.log(result);
     if(result) {
       // Create a new pre-signed url to store
       const signedUrl = await getPhotoUrl(result.Key);
-      // store the url to our mock database
+      // store the url and key to our mock database
       savePhoto({key: result.Key, photo_url: signedUrl});
+      // Get updated photos
       photos = getPhotos();
       fs.unlinkSync(req.file.path);
       return res.send(result);

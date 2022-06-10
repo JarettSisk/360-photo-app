@@ -2,7 +2,8 @@ const fs = require("fs");
 
 // Function for getting all photos from mock db
 function getPhotos() {
-  let data = fs.readFileSync('./photo_url_data.json', 'utf8'); 
+  let data = fs.readFileSync('./photo_url_data.json', 'utf8');
+  // Parse data and return 
   return JSON.parse(data);
 }
 
