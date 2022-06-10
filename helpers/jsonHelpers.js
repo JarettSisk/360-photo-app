@@ -1,11 +1,12 @@
 const fs = require("fs");
 
+// Function for getting all photos from mock db
 function getPhotos() {
   let data = fs.readFileSync('./photo_url_data.json', 'utf8'); 
   return JSON.parse(data);
 }
 
-// function to store new photo in our json file
+// Function to store new photo in mock db
 function savePhoto(item, path = './photo_url_data.json'){
   if (!fs.existsSync(path)) {
       fs.writeFile(path, JSON.stringify([item]), function(err, result) {
@@ -21,7 +22,7 @@ function savePhoto(item, path = './photo_url_data.json'){
   return "test";
 }
 
-// function to store new photo in our json file
+// Function to delete photo from mock db
 function deletePhoto(item, path = './photo_url_data.json'){
   let data = fs.readFileSync(path, 'utf8');
   let json = JSON.parse(data);

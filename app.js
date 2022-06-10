@@ -1,5 +1,4 @@
 "use strict";
-
 /** Express app. */
 const path = require('path')
 const express = require("express");
@@ -28,12 +27,10 @@ app.use('./jsm/', express.static('node_modules/three/examples/jsm'));
 const viewerRoutes = require("./routes/viewerRoutes");
 const photoRoutes = require("./routes/photoRoutes");
 app.get("/", (req, res, next) => {
-  res.redirect("/photo/add");
+  res.redirect("/photo");
 })
 app.use('/viewer', viewerRoutes);
 app.use('/photo', photoRoutes);
-
-
 
 /** Generic error handler; anything unhandled goes here. */
 app.use(function (err, req, res, next) {
@@ -45,7 +42,7 @@ app.use(function (err, req, res, next) {
 
 // Redirect incase no route is met
 app.get("/*", (req, res, next) => {
-  res.redirect("/photo/add");
+  res.redirect("/photo");
 })
 
 

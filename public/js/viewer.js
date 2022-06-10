@@ -1,7 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "orbitControls";
 let canvas = document.querySelector("#bg")
-console.log("working")
 
 // instantiate scene
 const scene = new THREE.Scene();
@@ -23,14 +22,27 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.enableZoom = false;
 
+// animate
+renderer.setAnimationLoop( function () {
+	renderer.render( scene, camera );
+  controls.update();
+} );
 
-// logic for photos
+// for dynamic resizing
+window.addEventListener( 'resize', onWindowResize, false );
+function onWindowResize(){
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerWidth, window.innerHeight );
+}
+
+// Vars for photo logic
 let fetchedPhotos;
 let currentPhoto;
 const previousPhotoButton = document.querySelector(".previous-photo-button");
-const nexPhotoButton = document.querySelector(".next-photo-button");
+const nextPhotoButton = document.querySelector(".next-photo-button");
 
-// --TODO: This will everntually take a param for the photo URL
+// Function to render a photo into our scene. 
 const renderPhoto = (photoURL="room1") => {
   // photo mesh setup
   const geometry = new THREE.SphereGeometry( 500, 60, 40 );
@@ -47,39 +59,27 @@ const renderPhoto = (photoURL="room1") => {
   });
 }
 
+// Function to get photos from our mock db
 const getPhotos = async () => {
-  //1. get the name of the album from query param
-  // 2. get all photos urls related to that album from the DB
-    // --TODO this is just test data. We need to get and store the data later.
-    const currentPath = window.location.pathname;
-    const photos = await axios.get(`/photo`);
-    console.log(photos)
-  // 3. if photos, return them
+  const photos = await axios.get(`/photo/get`);
   if(photos) {
     fetchedPhotos = photos.data;
-    console.log(fetchedPhotos)
     currentPhoto = fetchedPhotos[0];
     setTimeout(function(){
+      // Once photos are fetched, we render the first photo.
       renderPhoto(fetchedPhotos[0].photo_url);
     }, 1000);//wait 2 seconds
   }  
 }
 
-// initial call
-getPhotos();
+
 
 const changePhoto = (direction) => {
-
-  //--TODO set up function so that it makes a get request to our server,
-  // and fetches the next room base on whether we are moving forwards or backwars.
-  // We may end up fetching and storing an array of rooms in a different function for loading purposes.
-  // The goal right now is just to get something working.
   // check which button was pressed
   if(direction === "previous") {
     // get the prev photo
     let prevPhoto = fetchedPhotos[fetchedPhotos.indexOf(currentPhoto) - 1];
     // go to previous photo
-    
     if(prevPhoto) {
       canvas.classList.remove("visible");
       canvas.classList.add("hidden");
@@ -87,7 +87,7 @@ const changePhoto = (direction) => {
       setTimeout(function(){
         currentPhoto = prevPhoto;
         renderPhoto(prevPhoto.photo_url);
-      }, 1000);//wait 1 seconds
+      }, 1000);//wait 1 second
     }
     } else if (direction === "next") {
       // get to next photo
@@ -95,43 +95,27 @@ const changePhoto = (direction) => {
       if(nextPhoto) {
         canvas.classList.remove("visible");
         canvas.classList.add("hidden");
+        // hack for fade timing
         setTimeout(function(){
           currentPhoto = nextPhoto;
           renderPhoto(nextPhoto.photo_url);
-        }, 1000);//wait 1 seconds
+        }, 1000);//wait 1 second
       }
     }
-
-  
-  
 }
 
 // event listiners
 previousPhotoButton.addEventListener('click', function (e) {
+  // change to previous photo
   changePhoto("previous")
 });
 
-nexPhotoButton.addEventListener('click', function (e) {
+nextPhotoButton.addEventListener('click', function (e) {
+  // change to next photo
   changePhoto("next")
 });
 
-// animate
-renderer.setAnimationLoop( function () {
-
-	renderer.render( scene, camera );
-  controls.update();
-
-} );
+// initial call
+getPhotos();
 
 
-// for dynamic resizing
-window.addEventListener( 'resize', onWindowResize, false );
-
-function onWindowResize(){
-
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize( window.innerWidth, window.innerHeight );
-
-}

@@ -21,8 +21,8 @@
       You must have the passkey in order to use the upload function. 
     </p>
     <p>Dont have any 360 photos to upload? Check out the <a href="/viewer/demo" class="link">demo version</a></p>
-    <form action="" method="POST" class="add-photo-form" enctype="multipart/form-data">
-      <input type="password" name="password" class="password-input" id="password" placeholder="password" required>
+    <form action="" class="add-photo-form">
+      <input type="password" name="password" class="password-input" id="password-input" placeholder="password" required>
       <input type="file" id="image-upload-input" name="image" required>
       <button type="submit" class="add-photo-button">UPLOAD</button>
     </form>
@@ -32,12 +32,12 @@
 
     <p class="add-photo-loading"></p>
 
-    {% if message %}
-      <p>{{message}}</p>
-    {% endif %}
+    
+    <p class="message">{% if message %}{{message}}{% endif %}</p>
+    
 
     <ol class="photo-list">
-    <!-- list for holding uploaded photos -->
+      <!-- list for holding uploaded photos -->
     </ol>
 
 <!-- Scripts -->
