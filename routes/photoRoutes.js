@@ -38,9 +38,10 @@ router.post('/', upload.single('image'), async function (req, res, next) {
     }
     // Our image file
     const file = req.file;
+    console.log(file);
     // upload to AWS s3
     const result = await uploadFile(file)
-
+    console.log(result);
     if(result) {
       // Create a new pre-signed url to store
       const signedUrl = await getPhotoUrl(result.Key);

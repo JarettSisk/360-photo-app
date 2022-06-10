@@ -8,18 +8,20 @@ function getPhotos() {
 
 // Function to store new photo in mock db
 function savePhoto(item, path = './photo_url_data.json'){
+  // if no file exists, write to a new file.
   if (!fs.existsSync(path)) {
       fs.writeFile(path, JSON.stringify([item]), function(err, result) {
         if(err) console.log('error', err);
       });
-  } else {
+  }
+  // if file does exist, append the new photo object.
+  else {
       let data = fs.readFileSync(path, 'utf8');  
       let list = (data.length) ? JSON.parse(data): [];
       if (list instanceof Array) list.push(item)
       else list = [item]  
       fs.writeFileSync(path, JSON.stringify(list));
   }
-  return "test";
 }
 
 // Function to delete photo from mock db
